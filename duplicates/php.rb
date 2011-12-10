@@ -104,6 +104,7 @@ class Php < Formula
       "--with-tidy",
       "--with-mhash",
       "--mandir=#{man}"
+
     ]
 
     args.push "--with-gmp" if ARGV.include? '--with-gmp'
@@ -140,6 +141,10 @@ class Php < Formula
       args.push "--with-icu-dir=#{Formula.factory('icu4c').prefix}"
     end
 
+    if ARGV.include? '--with-cgi'
+      args.push "--enable-cgi"
+    end
+      
     args.push "--with-readline=#{Formula.factory('readline').prefix}" unless ARGV.include? '--without-readline'
 
     system "./configure", *args
